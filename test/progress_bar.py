@@ -23,7 +23,7 @@ print('\n%s' % (80 * '='))
 print('%s\n' % (80 * '='))
 print('Testing Progress Bar Generator\n')
 
-for i in pyprind.prog_bar(range(n), stream=sys.stdout):
+for i in pyprind.prog_bar(range(n), stream=sys.stdout, timeformat="min"):
     # do something
     pass
 
@@ -32,7 +32,7 @@ print('\n%s' % (80 * '='))
 print('%s\n' % (80 * '='))
 print('Testing monitor function\n')
 
-bar = pyprind.ProgBar(n, monitor=True)
+bar = pyprind.ProgBar(n, monitor=True, timeformat="min")
 for i in range(n):
     bar.update()
 print(bar)

@@ -35,10 +35,13 @@ class ProgBar(Prog):
     monitor : `bool` (default = False)
       Monitors CPU and memory usage if `True` (requires `psutil` package).
 
+    timeformat : 'str' (default = sec)
+      Setting the timeformat to show in Progbar. 'sec', 'min'
+
     """
     def __init__(self, iterations, track_time=True, width=30, bar_char='#',
-                 stream=2, title='', monitor=False):
-        Prog.__init__(self, iterations, track_time, stream, title, monitor)
+                 stream=2, title='', monitor=False, timeformat="sec"):
+        Prog.__init__(self, iterations, track_time, stream, title, monitor, timeformat)
         self.bar_width = width
         self._adjust_width()
         self.bar_char = bar_char

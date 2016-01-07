@@ -5,7 +5,7 @@ from io import UnsupportedOperation
 
 
 class Prog():
-    def __init__(self, iterations, track_time, stream, title, monitor):
+    def __init__(self, iterations, track_time, stream, title, monitor, timeformat):
         """ Initializes tracking object. """
         self.cnt = 0
         self.title = title
@@ -17,6 +17,7 @@ class Prog():
         self.eta = None
         self.total_time = 0.0
         self.monitor = monitor
+        self.timeformat = timeformat
         self.stream = stream
         self.active = True
         self._stream_out = self._no_stream
@@ -117,7 +118,7 @@ class Prog():
     def _print_eta(self):
         """ Prints the estimated time left."""
         self._calc_eta()
-        self._stream_out(' | ETA[sec]: {:.3f} '.format(self.eta))
+        self._stream_out(' | ETA[' + self.timeformat + ']:' + self.get_time(self.eta))
         self._stream_flush()
 
     def _print_item_id(self):
@@ -153,3 +154,11 @@ class Prog():
 
     def __str__(self):
         return self.__repr__()
+
+    def get_time(self, seconds):
+        timestr = str(seconds)
+        if self.timeformat == 'min':
+            minutes = seconds // 60
+            seconds = seconds % 60
+            timestr = '%02d:%02d' % (minutes, seconds)
+        return timestr
